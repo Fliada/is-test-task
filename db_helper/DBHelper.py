@@ -4,7 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import IntegrityError
 from dao.wb_card import *
 
-#сделать более унифицированным
+
+# сделать более унифицированным
 class DBHelper:
     def __init__(self, user, passwd, host, port, db):
         postgresql_url = f"postgresql://{user}:{passwd}@{host}:{port}/{db}"
@@ -18,8 +19,7 @@ class DBHelper:
         Base.metadata.create_all(self.engine)
 
     def insert(self, data):
-        for product_data in data:
-            product = Product(**product_data)
+        for product in data:
             self.session.add(product)
             try:
                 self.session.commit()
